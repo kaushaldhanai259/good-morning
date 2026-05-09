@@ -1,144 +1,455 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>For Veda 🌸</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+<title>Forgive Me Ginni ❤️</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 
 <style>
-body {
-  margin:0;
-  padding:0;
-  height:100vh;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  background: linear-gradient(135deg, #ffd6e0, #ffe6f0);
-  font-family: 'Segoe UI', sans-serif;
-  text-align:center;
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
 }
 
-.box {
-  background:white;
-  padding:35px;
-  border-radius:20px;
-  width:85%;
-  max-width:420px;
-  box-shadow:0 15px 35px rgba(0,0,0,0.15);
-  animation: fadeIn 1s ease;
+body{
+overflow-x:hidden;
+background:linear-gradient(-45deg,#ff758c,#ff7eb3,#ffb199,#ff5f6d);
+background-size:400% 400%;
+animation:bg 12s ease infinite;
+min-height:100vh;
+color:white;
 }
 
-@keyframes fadeIn {
-  from { opacity:0; transform: translateY(20px); }
-  to { opacity:1; transform: translateY(0); }
+@keyframes bg{
+0%{background-position:0% 50%;}
+50%{background-position:100% 50%;}
+100%{background-position:0% 50%;}
 }
 
-h2 {
-  color:#ff4d88;
-  margin-bottom:10px;
+/* Floating Hearts */
+
+.hearts{
+position:fixed;
+width:100%;
+height:100%;
+pointer-events:none;
+z-index:0;
+overflow:hidden;
 }
 
-.subtitle {
-  font-size:14px;
-  color:#888;
-  margin-bottom:15px;
+.heart{
+position:absolute;
+bottom:-20px;
+animation:float linear infinite;
+opacity:0.8;
 }
 
-#text p {
-  opacity:0;
-  transform: translateY(15px);
-  transition: all 0.6s ease;
-  margin:12px 0;
-  color:#444;
-  line-height:1.7;
+@keyframes float{
+0%{
+transform:translateY(0) rotate(0deg);
+opacity:0;
+}
+20%{
+opacity:1;
+}
+100%{
+transform:translateY(-120vh) rotate(360deg);
+opacity:0;
+}
 }
 
-.show {
-  opacity:1 !important;
-  transform: translateY(0) !important;
+/* Main Container */
+
+.container{
+position:relative;
+z-index:2;
+width:100%;
+padding:80px 20px;
+display:flex;
+justify-content:center;
+align-items:center;
+flex-direction:column;
 }
 
-.highlight {
-  color:#ff4d88;
-  font-weight:bold;
-  font-size:17px;
+/* Glass Card */
+
+.card{
+width:95%;
+max-width:900px;
+padding:60px 40px;
+border-radius:35px;
+background:rgba(255,255,255,0.12);
+backdrop-filter:blur(14px);
+box-shadow:0 10px 50px rgba(0,0,0,0.2);
+text-align:center;
+animation:fadeUp 2s ease;
 }
 
-button {
-  margin-top:15px;
-  padding:10px 22px;
-  border:none;
-  background:#ff4d88;
-  color:white;
-  border-radius:10px;
-  cursor:pointer;
-  font-size:14px;
-  transition:0.3s;
+@keyframes fadeUp{
+from{
+opacity:0;
+transform:translateY(80px);
+}
+to{
+opacity:1;
+transform:translateY(0);
+}
 }
 
-button:hover {
-  transform: scale(1.05);
+/* Title Animation */
+
+.title{
+font-size:4rem;
+font-weight:700;
+margin-bottom:30px;
+background:linear-gradient(to right,#fff,#ffe6f0,#fff);
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
+animation:glow 2s infinite alternate;
 }
+
+@keyframes glow{
+from{
+text-shadow:0 0 10px rgba(255,255,255,0.5);
+transform:scale(1);
+}
+to{
+text-shadow:0 0 30px rgba(255,255,255,1);
+transform:scale(1.03);
+}
+}
+
+/* Typing Text */
+
+.typing{
+font-size:1.4rem;
+line-height:2.3rem;
+margin-top:30px;
+min-height:250px;
+font-weight:300;
+letter-spacing:0.5px;
+}
+
+/* Question */
+
+.question{
+font-size:2.5rem;
+margin-top:60px;
+font-weight:bold;
+animation:pulse 2s infinite;
+}
+
+@keyframes pulse{
+0%{transform:scale(1);}
+50%{transform:scale(1.05);}
+100%{transform:scale(1);}
+}
+
+/* Buttons */
+
+.buttons{
+margin-top:70px;
+display:flex;
+justify-content:center;
+align-items:center;
+gap:180px;
+position:relative;
+height:150px;
+}
+
+button{
+padding:18px 45px;
+font-size:1.4rem;
+border:none;
+border-radius:60px;
+cursor:pointer;
+font-weight:700;
+transition:0.3s;
+position:absolute;
+}
+
+#yesBtn{
+background:white;
+color:#ff4f81;
+left:18%;
+box-shadow:0 0 25px rgba(255,255,255,0.7);
+}
+
+#yesBtn:hover{
+transform:scale(1.12);
+}
+
+#noBtn{
+background:#ff4f81;
+color:white;
+right:18%;
+box-shadow:0 0 25px rgba(255,79,129,0.8);
+}
+
+/* Final Message */
+
+.final{
+display:none;
+margin-top:70px;
+animation:finalAnim 1.5s ease forwards;
+}
+
+@keyframes finalAnim{
+from{
+opacity:0;
+transform:scale(0.4);
+}
+to{
+opacity:1;
+transform:scale(1);
+}
+}
+
+.final h2{
+font-size:2.4rem;
+margin-bottom:25px;
+line-height:4rem;
+}
+
+.love{
+font-size:6rem;
+font-weight:700;
+background:linear-gradient(to right,#fff,#ffdde1,#fff);
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
+animation:loveAnim 1.5s infinite alternate;
+}
+
+@keyframes loveAnim{
+from{
+transform:scale(1);
+text-shadow:0 0 20px white;
+}
+to{
+transform:scale(1.1);
+text-shadow:0 0 40px white;
+}
+}
+
+/* Romantic Lines */
+
+.lines{
+margin-top:80px;
+display:grid;
+gap:25px;
+}
+
+.line{
+font-size:1.3rem;
+padding:25px;
+border-radius:20px;
+background:rgba(255,255,255,0.08);
+animation:fadeLine 1s ease forwards;
+opacity:0;
+transform:translateY(50px);
+}
+
+.line:nth-child(1){animation-delay:1s;}
+.line:nth-child(2){animation-delay:2s;}
+.line:nth-child(3){animation-delay:3s;}
+.line:nth-child(4){animation-delay:4s;}
+
+@keyframes fadeLine{
+to{
+opacity:1;
+transform:translateY(0);
+}
+}
+
+.scrollText{
+margin-top:80px;
+font-size:2rem;
+animation:updown 2s infinite;
+}
+
+@keyframes updown{
+0%{transform:translateY(0);}
+50%{transform:translateY(-10px);}
+100%{transform:translateY(0);}
+}
+
 </style>
-
 </head>
 
 <body>
 
-<div class="box">
-  <h2>For You 🌸</h2>
-  <div class="subtitle">open this slowly…</div>
+<div class="hearts" id="hearts"></div>
 
-  <div id="text"></div>
+<div class="container">
 
-  <button onclick="showMessage()">Open 💌</button>
+<div class="card">
+
+<h1 class="title">Forgive Me Ginni ❤️</h1>
+
+<div class="typing" id="typing"></div>
+
+<div class="lines">
+
+<div class="line">
+Maybe I was not perfect... but my feelings for you were always real ❤️
+</div>
+
+<div class="line">
+Every mistake taught me your value even more...
+</div>
+
+<div class="line">
+I don't want temporary memories with you... I want forever 🌍
+</div>
+
+<div class="line">
+No matter what happens... my heart still chooses you ✨
+</div>
+
+</div>
+
+<div class="question">
+Do You Forgive Me? 🥺
+</div>
+
+<div class="buttons">
+
+<button id="yesBtn">
+Yes ❤️
+</button>
+
+<button id="noBtn">
+No 💔
+</button>
+
+</div>
+
+<div class="final" id="finalMessage">
+
+<h2>
+I know tu mujhse jyada time gussa nhii reh skti 😭❤️
+</h2>
+
+<div class="love">
+LOVE YOU ✨
+</div>
+
+</div>
+
+<div class="scrollText">
+❤️ Forever & Always ❤️
+</div>
+
+</div>
+
 </div>
 
 <script>
-function showMessage() {
 
-const lines = [
+/* Typing Animation */
 
-"Good morning Veda❤️",
+const text = `
+I know I made many mistakes in my past...
 
-"I know i might said this before and i genuinely mean it …",
+Maybe I hurt you...
+Maybe I failed to understand you sometimes...
 
-"You’re actually a really good human being.",
-"The way you think, the way you carry yourself… it’s rare.",
+But trust me...
+my intentions for you were never fake.
 
-"And honestly, you're already perfect the way you are,",
-"and you don’t have to overthink every little thing.",
+You are genuinely special to me ❤️
 
-"Not everything deserves that much space in your head.",
+I don't just want your attention...
+I want your smile,
+your happiness,
+your presence,
+your forever.
 
-"There’s something about your vibe,",
-"it’s calm… a little different… and kinda addictive 😌",
+And if I get one more chance...
+I promise I will love you better than before...
+`;
 
-"And yeah…",
+let i = 0;
+const speed = 40;
 
-'✨ <span class="highlight">Keep smiling</span> ✨',
+function typing(){
+if(i < text.length){
+document.getElementById("typing").innerHTML += text.charAt(i);
+i++;
+setTimeout(typing,speed);
+}
+}
 
-"Because your smile is honestly more precious than you think.",
-"And it makes things around you feel a little better too.",
+typing();
 
-"So yeah… just stay the way you are.",
+/* Floating Hearts */
 
-"Have a really good day 🌸"
-];
+const hearts = document.getElementById("hearts");
 
-let container = document.getElementById("text");
-container.innerHTML = "";
+for(let i=0;i<70;i++){
 
-lines.forEach((line, index) => {
-  let p = document.createElement("p");
-  p.innerHTML = line;
-  container.appendChild(p);
+const heart = document.createElement("div");
 
-  setTimeout(() => {
-    p.classList.add("show");
-  }, index * 700);
+heart.classList.add("heart");
+
+heart.innerHTML = "❤️";
+
+heart.style.left = Math.random()*100 + "vw";
+
+heart.style.fontSize = Math.random()*30 + 15 + "px";
+
+heart.style.animationDuration = Math.random()*8 + 5 + "s";
+
+heart.style.opacity = Math.random();
+
+hearts.appendChild(heart);
+}
+
+/* Buttons */
+
+const noBtn = document.getElementById("noBtn");
+const yesBtn = document.getElementById("yesBtn");
+const finalMessage = document.getElementById("finalMessage");
+
+let yesScale = 1;
+let noScale = 1;
+
+noBtn.addEventListener("click",()=>{
+
+yesScale += 0.18;
+noScale -= 0.1;
+
+yesBtn.style.transform = `scale(${yesScale})`;
+noBtn.style.transform = `scale(${noScale})`;
+
+const randomX = Math.random()*500 - 250;
+const randomY = Math.random()*200 - 100;
+
+noBtn.style.left = `${randomX}px`;
+noBtn.style.top = `${randomY}px`;
+
+if(noScale <= 0.3){
+noBtn.style.display = "none";
+}
+
 });
 
-}
+yesBtn.addEventListener("click",()=>{
+
+finalMessage.style.display = "block";
+
+document.querySelector(".buttons").style.display = "none";
+
+document.querySelector(".question").innerHTML = "Awwww ❤️";
+
+});
+
 </script>
 
 </body>
