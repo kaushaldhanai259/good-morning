@@ -3,167 +3,216 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Digital Scrapbook</title>
-    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&family=Montserrat:wght@300;500&display=swap" rel="stylesheet">
+    <title>THE MUSE | A Visual Memoir</title>
+    
+    <!-- Premium Fonts & Animation Libraries -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@200;400;600&display=swap" rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
     <style>
         :root {
-            --bg-color: #f4f1ea;
-            --accent-color: #d4a373;
-            --tape-color: rgba(212, 163, 115, 0.3);
-            --text-color: #4a4a4a;
+            --bg: #fdfcfb;
+            --dark: #1a1a1a;
+            --accent: #8d99ae;
+            --soft-white: #ffffff;
         }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; cursor: none; }
 
         body {
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            font-family: 'Montserrat', sans-serif;
-            margin: 0;
-            padding: 40px 20px;
-            line-height: 1.6;
+            background-color: var(--bg);
+            color: var(--dark);
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+            line-height: 1.5;
         }
 
-        header {
-            text-align: center;
-            margin-bottom: 50px;
+        /* Custom Premium Cursor */
+        #cursor {
+            width: 10px; height: 10px; background: var(--dark);
+            border-radius: 50%; position: fixed; pointer-events: none;
+            z-index: 10000; transition: transform 0.15s ease;
+        }
+        #cursor-outline {
+            width: 40px; height: 40px; border: 1px solid var(--dark);
+            border-radius: 50%; position: fixed; pointer-events: none;
+            z-index: 9999; transition: all 0.2s ease-out;
         }
 
-        h1 {
-            font-family: 'Dancing Script', cursive;
-            font-size: 3.5rem;
-            margin-bottom: 10px;
-            color: var(--accent-color);
+        /* Hero Section */
+        .hero {
+            height: 100vh; width: 100%; position: relative;
+            display: flex; align-items: center; justify-content: center;
+            overflow: hidden; background: #000;
+        }
+        .hero-img {
+            position: absolute; width: 100%; height: 100%;
+            object-fit: cover; opacity: 0.7; transform: scale(1.1);
+            animation: slowZoom 20s infinite alternate;
+        }
+        @keyframes slowZoom { from {transform: scale(1.1);} to {transform: scale(1.3);} }
+
+        .hero-title {
+            position: relative; z-index: 10; color: white; text-align: center;
+        }
+        .hero-title h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(3rem, 12vw, 8rem);
+            font-weight: 400; font-style: italic;
         }
 
-        /* Bento Box Grid */
-        .scrapbook-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            grid-auto-rows: 300px;
-            gap: 30px;
-            max-width: 1200px;
-            margin: 0 auto;
+        /* Magazine Layout Sections */
+        .section { padding: 100px 5%; position: relative; }
+        
+        .grid-spread {
+            display: grid; grid-template-columns: repeat(12, 1fr); gap: 20px;
+            align-items: center; margin-bottom: 150px;
         }
 
-        /* Polaroid Card Styles */
-        .polaroid {
-            background: white;
-            padding: 15px 15px 40px 15px;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-            position: relative;
-            transition: transform 0.4s ease, box-shadow 0.4s ease;
-            cursor: pointer;
-            overflow: hidden;
-        }
+        .img-container { position: relative; overflow: hidden; width: 100%; }
+        .img-container img { width: 100%; height: 100%; object-fit: cover; transition: 1s ease; }
+        .img-container:hover img { transform: scale(1.05); }
 
-        .polaroid img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            filter: sepia(20%);
-        }
+        /* Photo Variations */
+        .photo-lg { grid-column: 1 / 8; height: 70vh; }
+        .photo-sm { grid-column: 8 / 13; height: 50vh; margin-top: 100px; }
+        .photo-center { grid-column: 3 / 11; height: 80vh; margin: 100px 0; }
+        .photo-portrait { grid-column: 2 / 6; height: 70vh; }
+        .photo-landscape { grid-column: 6 / 12; height: 50vh; margin-top: -50px; }
 
-        .polaroid:nth-child(even) { transform: rotate(-2deg); }
-        .polaroid:nth-child(odd) { transform: rotate(2deg); }
-
-        .polaroid:hover {
-            transform: rotate(0deg) scale(1.05);
-            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
-            z-index: 10;
-        }
-
-        /* Washi Tape Effect */
-        .polaroid::before {
-            content: '';
-            position: absolute;
-            top: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 100px;
-            height: 30px;
-            background: var(--tape-color);
-            backdrop-filter: blur(2px);
-            z-index: 2;
-        }
-
+        /* Typography */
         .caption {
-            font-family: 'Dancing Script', cursive;
-            text-align: center;
-            font-size: 1.2rem;
-            margin-top: 15px;
-            color: var(--text-color);
+            font-family: 'Playfair Display', serif; font-size: 1.2rem;
+            margin-top: 15px; font-style: italic; opacity: 0.8;
         }
+        .journal-text {
+            grid-column: 8 / 12; padding-left: 40px;
+        }
+        .journal-text h2 { font-family: 'Playfair Display', serif; font-size: 3rem; margin-bottom: 20px; }
 
-        /* Bento Span Logic */
-        .wide { grid-column: span 2; }
-        .tall { grid-row: span 2; }
-
-        @media (max-width: 768px) {
-            .wide, .tall { grid-column: span 1; grid-row: span 1; }
+        /* Full Width Parallax */
+        .parallax-section {
+            height: 100vh; overflow: hidden; position: relative; margin: 100px 0;
+        }
+        .parallax-bg {
+            position: absolute; top: -20%; left: 0; width: 100%; height: 140%;
+            object-fit: cover; will-change: transform;
         }
 
         footer {
-            text-align: center;
-            margin-top: 80px;
-            font-size: 0.9rem;
-            opacity: 0.7;
+            padding: 100px 5%; background: #111; color: white; text-align: center;
         }
     </style>
 </head>
 <body>
 
-    <header>
-        <h1>Our Little Moments</h1>
-        <p>A collection of memories, art, and everything in between.</p>
-    </header>
+    <div id="cursor"></div>
+    <div id="cursor-outline"></div>
 
-    <div class="scrapbook-grid">
-        <!-- Photo 1 (Tall) -->
-        <div class="polaroid tall">
-            <img src="https://via.placeholder.com/500x800" alt="Memory 1">
-            <div class="caption">Mountain Mornings</div>
+    <!-- Section 1: Hero -->
+    <section class="hero">
+        <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=1974" class="hero-img" alt="Main Portrait">
+        <div class="hero-title">
+            <p data-aos="fade-up" style="letter-spacing: 5px;">EST. 2026</p>
+            <h1 data-aos="fade-up" data-aos-delay="300">Portraits</h1>
+        </div>
+    </section>
+
+    <!-- Section 2: Floating Spread -->
+    <section class="section">
+        <div class="grid-spread">
+            <div class="img-container photo-lg" data-aos="reveal-right">
+                <img src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?q=80&w=1974" alt="Photo 1">
+                <p class="caption">01 — The Golden Hour</p>
+            </div>
+            <div class="img-container photo-sm" data-aos="fade-up" data-aos-delay="400">
+                <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?q=80&w=1974" alt="Photo 2">
+                <p class="caption">02 — Candid Essence</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 3: Large Centerpiece -->
+    <section class="section" style="background: #f0f0f0;">
+        <div class="grid-spread">
+            <div class="journal-text" data-aos="fade-right">
+                <h2>Grace in Motion</h2>
+                <p>A collection of moments frozen in time, capturing the elegance of a life lived beautifully.</p>
+            </div>
+            <div class="img-container photo-center" data-aos="zoom-in">
+                <img src="https://images.unsplash.com/photo-1469334031218-e382a71b716b?q=80&w=2070" alt="Photo 3">
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 4: Parallax Break -->
+    <section class="parallax-section">
+        <img src="https://images.unsplash.com/photo-1441974231531-c6227db76b6e?q=80&w=2071" class="parallax-bg" id="parallaxImg">
+        <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); color: white; text-align: center;">
+            <h2 style="font-family: 'Playfair Display'; font-size: 5vw;">Lost in the Wild</h2>
+        </div>
+    </section>
+
+    <!-- Section 5: Staggered Portrait Mix -->
+    <section class="section">
+        <div class="grid-spread">
+            <div class="img-container photo-portrait" data-aos="fade-up">
+                <img src="https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?q=80&w=1974" alt="Photo 4">
+                <p class="caption">04 — Pure Focus</p>
+            </div>
+            <div class="img-container photo-landscape" data-aos="fade-up" data-aos-delay="300">
+                <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=1964" alt="Photo 5">
+                <p class="caption">05 — Dreamer</p>
+            </div>
         </div>
 
-        <!-- Photo 2 (Wide) -->
-        <div class="polaroid wide">
-            <img src="https://via.placeholder.com/800x400" alt="Memory 2">
-            <div class="caption">City Lights & Late Nights</div>
+        <div class="grid-spread" style="margin-top: 100px;">
+             <div class="img-container photo-lg" style="grid-column: 5 / 13; height: 60vh;" data-aos="fade-left">
+                <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?q=80&w=2070" alt="Photo 6">
+                <p class="caption">06 — Serenity</p>
+            </div>
         </div>
+    </section>
 
-        <!-- Photo 3 -->
-        <div class="polaroid">
-            <img src="https://via.placeholder.com/400x400" alt="Memory 3">
-            <div class="caption">Coffee Dates</div>
+    <!-- Section 6: Final Gallery Cluster -->
+    <section class="section" style="display: flex; gap: 20px;">
+        <div class="img-container" style="flex: 1; height: 400px;" data-aos="flip-left">
+            <img src="https://images.unsplash.com/photo-1488161628813-04466f872be2?q=80&w=1964">
         </div>
-
-        <!-- Photo 4 -->
-        <div class="polaroid">
-            <img src="https://via.placeholder.com/400x400" alt="Memory 4">
-            <div class="caption">Sunset Bliss</div>
+        <div class="img-container" style="flex: 1; height: 400px;" data-aos="flip-left" data-aos-delay="200">
+            <img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?q=80&w=1920">
         </div>
-
-        <!-- Photo 5 (Wide) -->
-        <div class="polaroid wide">
-            <img src="https://via.placeholder.com/800x400" alt="Memory 5">
-            <div class="caption">The Best Weekend Ever</div>
+        <div class="img-container" style="flex: 1; height: 400px;" data-aos="flip-left" data-aos-delay="400">
+            <img src="https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?q=80&w=2070">
         </div>
-    </div>
+    </section>
 
     <footer>
-        <p>Built with ♡ and hosted on GitHub Pages</p>
+        <h1 style="font-family: 'Playfair Display'; margin-bottom: 20px;">A Portrait of Her</h1>
+        <p>Created with GitHub Pages & Passion</p>
     </footer>
 
+    <!-- Scripts -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
-        // Simple Interaction: Click a polaroid to "shake" it
-        document.querySelectorAll('.polaroid').forEach(item => {
-            item.addEventListener('click', () => {
-                item.style.transition = '0.1s';
-                item.style.transform = 'translateX(5px)';
-                setTimeout(() => item.style.transform = 'translateX(-5px)', 50);
-                setTimeout(() => {
-                    item.style.transition = '0.4s';
-                    item.style.transform = 'rotate(0deg) scale(1.05)';
-                }, 100);
-            });
+        AOS.init({ duration: 1200, once: false });
+
+        // Custom Cursor Movement
+        const cursor = document.getElementById('cursor');
+        const outline = document.getElementById('cursor-outline');
+        
+        document.addEventListener('mousemove', (e) => {
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top = e.clientY + 'px';
+            outline.style.left = e.clientX - 15 + 'px';
+            outline.style.top = e.clientY - 15 + 'px';
+        });
+
+        // Parallax Effect
+        window.addEventListener('scroll', () => {
+            const parallaxImg = document.getElementById('parallaxImg');
+            let scrollPosition = window.pageYOffset;
+            parallaxImg.style.transform = `translateY(${scrollPosition * 0.15}px)`;
         });
     </script>
 </body>
