@@ -3,217 +3,264 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>THE MUSE | A Visual Memoir</title>
+    <title>For Someone Special</title>
     
-    <!-- Premium Fonts & Animation Libraries -->
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@200;400;600&display=swap" rel="stylesheet">
+    <!-- Emotional & Elegant Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;1,400&family=Great+Vibes&family=Montserrat:wght@200;400&display=swap" rel="stylesheet">
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     
     <style>
         :root {
-            --bg: #fdfcfb;
-            --dark: #1a1a1a;
-            --accent: #8d99ae;
-            --soft-white: #ffffff;
+            --rose: #fff5f5;
+            --deep-rose: #d4a3a3;
+            --text: #4a4a4a;
+            --white: #ffffff;
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; cursor: none; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
-            background-color: var(--bg);
-            color: var(--dark);
-            font-family: 'Inter', sans-serif;
+            background-color: var(--rose);
+            color: var(--text);
+            font-family: 'Cormorant Garamond', serif;
             overflow-x: hidden;
-            line-height: 1.5;
         }
 
-        /* Custom Premium Cursor */
-        #cursor {
-            width: 10px; height: 10px; background: var(--dark);
-            border-radius: 50%; position: fixed; pointer-events: none;
-            z-index: 10000; transition: transform 0.15s ease;
-        }
-        #cursor-outline {
-            width: 40px; height: 40px; border: 1px solid var(--dark);
-            border-radius: 50%; position: fixed; pointer-events: none;
-            z-index: 9999; transition: all 0.2s ease-out;
+        /* Floating Hearts Background */
+        #canvas {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            z-index: -1;
+            opacity: 0.5;
         }
 
         /* Hero Section */
         .hero {
-            height: 100vh; width: 100%; position: relative;
-            display: flex; align-items: center; justify-content: center;
-            overflow: hidden; background: #000;
-        }
-        .hero-img {
-            position: absolute; width: 100%; height: 100%;
-            object-fit: cover; opacity: 0.7; transform: scale(1.1);
-            animation: slowZoom 20s infinite alternate;
-        }
-        @keyframes slowZoom { from {transform: scale(1.1);} to {transform: scale(1.3);} }
-
-        .hero-title {
-            position: relative; z-index: 10; color: white; text-align: center;
-        }
-        .hero-title h1 {
-            font-family: 'Playfair Display', serif;
-            font-size: clamp(3rem, 12vw, 8rem);
-            font-weight: 400; font-style: italic;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 20px;
         }
 
-        /* Magazine Layout Sections */
-        .section { padding: 100px 5%; position: relative; }
-        
-        .grid-spread {
-            display: grid; grid-template-columns: repeat(12, 1fr); gap: 20px;
-            align-items: center; margin-bottom: 150px;
+        .hero h1 {
+            font-family: 'Great Vibes', cursive;
+            font-size: clamp(3rem, 10vw, 6rem);
+            color: var(--deep-rose);
+            margin-bottom: 20px;
         }
 
-        .img-container { position: relative; overflow: hidden; width: 100%; }
-        .img-container img { width: 100%; height: 100%; object-fit: cover; transition: 1s ease; }
-        .img-container:hover img { transform: scale(1.05); }
-
-        /* Photo Variations */
-        .photo-lg { grid-column: 1 / 8; height: 70vh; }
-        .photo-sm { grid-column: 8 / 13; height: 50vh; margin-top: 100px; }
-        .photo-center { grid-column: 3 / 11; height: 80vh; margin: 100px 0; }
-        .photo-portrait { grid-column: 2 / 6; height: 70vh; }
-        .photo-landscape { grid-column: 6 / 12; height: 50vh; margin-top: -50px; }
-
-        /* Typography */
-        .caption {
-            font-family: 'Playfair Display', serif; font-size: 1.2rem;
-            margin-top: 15px; font-style: italic; opacity: 0.8;
+        .hero p {
+            font-family: 'Montserrat', sans-serif;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            opacity: 0.7;
         }
-        .journal-text {
-            grid-column: 8 / 12; padding-left: 40px;
-        }
-        .journal-text h2 { font-family: 'Playfair Display', serif; font-size: 3rem; margin-bottom: 20px; }
 
-        /* Full Width Parallax */
-        .parallax-section {
-            height: 100vh; overflow: hidden; position: relative; margin: 100px 0;
+        /* The Emotional "Compliment" Sections */
+        .compliment-wrap {
+            max-width: 800px;
+            margin: 100px auto;
+            padding: 40px;
+            text-align: center;
         }
-        .parallax-bg {
-            position: absolute; top: -20%; left: 0; width: 100%; height: 140%;
-            object-fit: cover; will-change: transform;
+
+        .compliment-card {
+            background: var(--white);
+            padding: 60px 40px;
+            border-radius: 2px;
+            box-shadow: 0 10px 30px rgba(212, 163, 163, 0.2);
+            position: relative;
+            border: 1px solid rgba(212, 163, 163, 0.3);
+        }
+
+        .compliment-card h2 {
+            font-family: 'Great Vibes', cursive;
+            font-size: 2.5rem;
+            color: var(--deep-rose);
+            margin-bottom: 20px;
+        }
+
+        .compliment-card p {
+            font-size: 1.4rem;
+            line-height: 1.8;
+            font-style: italic;
+        }
+
+        /* Photo Gallery - Soft & Framed */
+        .photo-section {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 40px;
+            padding: 100px 5%;
+        }
+
+        .photo-frame {
+            width: 300px;
+            background: white;
+            padding: 15px 15px 60px 15px;
+            box-shadow: 0 15px 25px rgba(0,0,0,0.05);
+            transform: rotate(-2deg);
+            transition: 0.5s;
+        }
+
+        .photo-frame:nth-child(even) { transform: rotate(3deg); }
+
+        .photo-frame img {
+            width: 100%;
+            height: 350px;
+            object-fit: cover;
+            filter: grayscale(20%);
+        }
+
+        .photo-frame:hover {
+            transform: rotate(0deg) scale(1.05);
+            z-index: 10;
+        }
+
+        /* Scrolling Love Letter */
+        .letter-section {
+            background: #fffafa;
+            padding: 150px 10%;
+            text-align: center;
+            border-top: 1px solid #f0e4e4;
+        }
+
+        .letter-content {
+            max-width: 700px;
+            margin: 0 auto;
+            font-size: 1.5rem;
+            line-height: 2;
+            color: #555;
         }
 
         footer {
-            padding: 100px 5%; background: #111; color: white; text-align: center;
+            padding: 100px 20px;
+            text-align: center;
+            background: var(--white);
         }
+
+        .heart-icon {
+            color: #e5989b;
+            font-size: 2rem;
+            margin-top: 20px;
+        }
+
     </style>
 </head>
 <body>
 
-    <div id="cursor"></div>
-    <div id="cursor-outline"></div>
+    <canvas id="canvas"></canvas>
 
-    <!-- Section 1: Hero -->
     <section class="hero">
-        <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=1974" class="hero-img" alt="Main Portrait">
-        <div class="hero-title">
-            <p data-aos="fade-up" style="letter-spacing: 5px;">EST. 2026</p>
-            <h1 data-aos="fade-up" data-aos-delay="300">Portraits</h1>
+        <p data-aos="fade-down">A message just for you</p>
+        <h1 data-aos="zoom-in">To the girl who lights up everything.</h1>
+        <div class="heart-icon" data-aos="fade-up">❤</div>
+    </section>
+
+    <!-- Compliment 1 -->
+    <section class="compliment-wrap" data-aos="fade-up">
+        <div class="compliment-card">
+            <h2>Your Kindness...</h2>
+            <p>"The way you treat everyone with such warmth is rare. You have a heart that makes the world feel like a better place just by being in it."</p>
         </div>
     </section>
 
-    <!-- Section 2: Floating Spread -->
-    <section class="section">
-        <div class="grid-spread">
-            <div class="img-container photo-lg" data-aos="reveal-right">
-                <img src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?q=80&w=1974" alt="Photo 1">
-                <p class="caption">01 — The Golden Hour</p>
-            </div>
-            <div class="img-container photo-sm" data-aos="fade-up" data-aos-delay="400">
-                <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?q=80&w=1974" alt="Photo 2">
-                <p class="caption">02 — Candid Essence</p>
-            </div>
+    <!-- Photo Break -->
+    <section class="photo-section">
+        <div class="photo-frame" data-aos="fade-right">
+            <img src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?q=80&w=1974">
+        </div>
+        <div class="photo-frame" data-aos="fade-left">
+            <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?q=80&w=1974">
         </div>
     </section>
 
-    <!-- Section 3: Large Centerpiece -->
-    <section class="section" style="background: #f0f0f0;">
-        <div class="grid-spread">
-            <div class="journal-text" data-aos="fade-right">
-                <h2>Grace in Motion</h2>
-                <p>A collection of moments frozen in time, capturing the elegance of a life lived beautifully.</p>
-            </div>
-            <div class="img-container photo-center" data-aos="zoom-in">
-                <img src="https://images.unsplash.com/photo-1469334031218-e382a71b716b?q=80&w=2070" alt="Photo 3">
-            </div>
+    <!-- Compliment 2 -->
+    <section class="compliment-wrap" data-aos="fade-up">
+        <div class="compliment-card">
+            <h2>Your Smile...</h2>
+            <p>"It isn't just a look; it's a feeling. Seeing you happy is the highlight of any day. Never let that light fade."</p>
         </div>
     </section>
 
-    <!-- Section 4: Parallax Break -->
-    <section class="parallax-section">
-        <img src="https://images.unsplash.com/photo-1441974231531-c6227db76b6e?q=80&w=2071" class="parallax-bg" id="parallaxImg">
-        <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); color: white; text-align: center;">
-            <h2 style="font-family: 'Playfair Display'; font-size: 5vw;">Lost in the Wild</h2>
+    <!-- Emotional Message -->
+    <section class="letter-section">
+        <div class="letter-content" data-aos="fade-up">
+            <p>I wanted to build this little corner of the internet just for you. A place you can come to whenever you need a reminder of how amazing you are.</p>
+            <br>
+            <p>You are strong, you are beautiful, and you are more than enough. Keep shining your light, because the world is a lot brighter with you in it.</p>
         </div>
     </section>
 
-    <!-- Section 5: Staggered Portrait Mix -->
-    <section class="section">
-        <div class="grid-spread">
-            <div class="img-container photo-portrait" data-aos="fade-up">
-                <img src="https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?q=80&w=1974" alt="Photo 4">
-                <p class="caption">04 — Pure Focus</p>
-            </div>
-            <div class="img-container photo-landscape" data-aos="fade-up" data-aos-delay="300">
-                <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=1964" alt="Photo 5">
-                <p class="caption">05 — Dreamer</p>
-            </div>
-        </div>
-
-        <div class="grid-spread" style="margin-top: 100px;">
-             <div class="img-container photo-lg" style="grid-column: 5 / 13; height: 60vh;" data-aos="fade-left">
-                <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?q=80&w=2070" alt="Photo 6">
-                <p class="caption">06 — Serenity</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- Section 6: Final Gallery Cluster -->
-    <section class="section" style="display: flex; gap: 20px;">
-        <div class="img-container" style="flex: 1; height: 400px;" data-aos="flip-left">
-            <img src="https://images.unsplash.com/photo-1488161628813-04466f872be2?q=80&w=1964">
-        </div>
-        <div class="img-container" style="flex: 1; height: 400px;" data-aos="flip-left" data-aos-delay="200">
-            <img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?q=80&w=1920">
-        </div>
-        <div class="img-container" style="flex: 1; height: 400px;" data-aos="flip-left" data-aos-delay="400">
-            <img src="https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?q=80&w=2070">
+    <!-- Final Photo Section -->
+    <section class="photo-section">
+        <div class="photo-frame" data-aos="zoom-in">
+            <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=1974">
         </div>
     </section>
 
     <footer>
-        <h1 style="font-family: 'Playfair Display'; margin-bottom: 20px;">A Portrait of Her</h1>
-        <p>Created with GitHub Pages & Passion</p>
+        <h2 style="font-family: 'Great Vibes'; font-size: 3rem; color: var(--deep-rose);">You are appreciated.</h2>
+        <p style="font-family: 'Montserrat'; font-size: 0.8rem; margin-top: 10px;">Always.</p>
     </footer>
 
-    <!-- Scripts -->
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
-        AOS.init({ duration: 1200, once: false });
+        AOS.init({ duration: 1500 });
 
-        // Custom Cursor Movement
-        const cursor = document.getElementById('cursor');
-        const outline = document.getElementById('cursor-outline');
-        
-        document.addEventListener('mousemove', (e) => {
-            cursor.style.left = e.clientX + 'px';
-            cursor.style.top = e.clientY + 'px';
-            outline.style.left = e.clientX - 15 + 'px';
-            outline.style.top = e.clientY - 15 + 'px';
-        });
+        // Floating Hearts Logic
+        const canvas = document.getElementById('canvas');
+        const ctx = canvas.getContext('2d');
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
 
-        // Parallax Effect
-        window.addEventListener('scroll', () => {
-            const parallaxImg = document.getElementById('parallaxImg');
-            let scrollPosition = window.pageYOffset;
-            parallaxImg.style.transform = `translateY(${scrollPosition * 0.15}px)`;
-        });
+        let hearts = [];
+
+        class Heart {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = canvas.height + 10;
+                this.size = Math.random() * 15 + 5;
+                this.speed = Math.random() * 1 + 0.5;
+                this.opacity = Math.random() * 0.5;
+            }
+
+            draw() {
+                ctx.fillStyle = `rgba(212, 163, 163, ${this.opacity})`;
+                ctx.beginPath();
+                ctx.moveTo(this.x, this.y);
+                ctx.bezierCurveTo(this.x - this.size/2, this.y - this.size/2, this.x - this.size, this.y + this.size/3, this.x, this.y + this.size);
+                ctx.bezierCurveTo(this.x + this.size, this.y + this.size/3, this.x + this.size/2, this.y - this.size/2, this.x, this.y);
+                ctx.fill();
+            }
+
+            update() {
+                this.y -= this.speed;
+                if (this.y < -20) this.y = canvas.height + 20;
+                this.draw();
+            }
+        }
+
+        function init() {
+            for (let i = 0; i < 30; i++) {
+                hearts.push(new Heart());
+            }
+        }
+
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            hearts.forEach(h => h.update());
+            requestAnimationFrame(animate);
+        }
+
+        init();
+        animate();
     </script>
 </body>
 </html>
