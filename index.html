@@ -1,456 +1,170 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digital Scrapbook</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&family=Montserrat:wght@300;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #f4f1ea;
+            --accent-color: #d4a373;
+            --tape-color: rgba(212, 163, 115, 0.3);
+            --text-color: #4a4a4a;
+        }
 
-<title>Forgive Me Ginni ❤️</title>
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: 'Montserrat', sans-serif;
+            margin: 0;
+            padding: 40px 20px;
+            line-height: 1.6;
+        }
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+        header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
 
-<style>
+        h1 {
+            font-family: 'Dancing Script', cursive;
+            font-size: 3.5rem;
+            margin-bottom: 10px;
+            color: var(--accent-color);
+        }
 
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:'Poppins',sans-serif;
-}
+        /* Bento Box Grid */
+        .scrapbook-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            grid-auto-rows: 300px;
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
 
-body{
-overflow-x:hidden;
-background:linear-gradient(-45deg,#ff758c,#ff7eb3,#ffb199,#ff5f6d);
-background-size:400% 400%;
-animation:bg 12s ease infinite;
-min-height:100vh;
-color:white;
-}
+        /* Polaroid Card Styles */
+        .polaroid {
+            background: white;
+            padding: 15px 15px 40px 15px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            position: relative;
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+            cursor: pointer;
+            overflow: hidden;
+        }
 
-@keyframes bg{
-0%{background-position:0% 50%;}
-50%{background-position:100% 50%;}
-100%{background-position:0% 50%;}
-}
+        .polaroid img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: sepia(20%);
+        }
 
-/* Floating Hearts */
+        .polaroid:nth-child(even) { transform: rotate(-2deg); }
+        .polaroid:nth-child(odd) { transform: rotate(2deg); }
 
-.hearts{
-position:fixed;
-width:100%;
-height:100%;
-pointer-events:none;
-z-index:0;
-overflow:hidden;
-}
+        .polaroid:hover {
+            transform: rotate(0deg) scale(1.05);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+            z-index: 10;
+        }
 
-.heart{
-position:absolute;
-bottom:-20px;
-animation:float linear infinite;
-opacity:0.8;
-}
+        /* Washi Tape Effect */
+        .polaroid::before {
+            content: '';
+            position: absolute;
+            top: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 30px;
+            background: var(--tape-color);
+            backdrop-filter: blur(2px);
+            z-index: 2;
+        }
 
-@keyframes float{
-0%{
-transform:translateY(0) rotate(0deg);
-opacity:0;
-}
-20%{
-opacity:1;
-}
-100%{
-transform:translateY(-120vh) rotate(360deg);
-opacity:0;
-}
-}
+        .caption {
+            font-family: 'Dancing Script', cursive;
+            text-align: center;
+            font-size: 1.2rem;
+            margin-top: 15px;
+            color: var(--text-color);
+        }
 
-/* Main Container */
+        /* Bento Span Logic */
+        .wide { grid-column: span 2; }
+        .tall { grid-row: span 2; }
 
-.container{
-position:relative;
-z-index:2;
-width:100%;
-padding:80px 20px;
-display:flex;
-justify-content:center;
-align-items:center;
-flex-direction:column;
-}
+        @media (max-width: 768px) {
+            .wide, .tall { grid-column: span 1; grid-row: span 1; }
+        }
 
-/* Glass Card */
-
-.card{
-width:95%;
-max-width:900px;
-padding:60px 40px;
-border-radius:35px;
-background:rgba(255,255,255,0.12);
-backdrop-filter:blur(14px);
-box-shadow:0 10px 50px rgba(0,0,0,0.2);
-text-align:center;
-animation:fadeUp 2s ease;
-}
-
-@keyframes fadeUp{
-from{
-opacity:0;
-transform:translateY(80px);
-}
-to{
-opacity:1;
-transform:translateY(0);
-}
-}
-
-/* Title Animation */
-
-.title{
-font-size:4rem;
-font-weight:700;
-margin-bottom:30px;
-background:linear-gradient(to right,#fff,#ffe6f0,#fff);
--webkit-background-clip:text;
--webkit-text-fill-color:transparent;
-animation:glow 2s infinite alternate;
-}
-
-@keyframes glow{
-from{
-text-shadow:0 0 10px rgba(255,255,255,0.5);
-transform:scale(1);
-}
-to{
-text-shadow:0 0 30px rgba(255,255,255,1);
-transform:scale(1.03);
-}
-}
-
-/* Typing Text */
-
-.typing{
-font-size:1.4rem;
-line-height:2.3rem;
-margin-top:30px;
-min-height:250px;
-font-weight:300;
-letter-spacing:0.5px;
-}
-
-/* Question */
-
-.question{
-font-size:2.5rem;
-margin-top:60px;
-font-weight:bold;
-animation:pulse 2s infinite;
-}
-
-@keyframes pulse{
-0%{transform:scale(1);}
-50%{transform:scale(1.05);}
-100%{transform:scale(1);}
-}
-
-/* Buttons */
-
-.buttons{
-margin-top:70px;
-display:flex;
-justify-content:center;
-align-items:center;
-gap:180px;
-position:relative;
-height:150px;
-}
-
-button{
-padding:18px 45px;
-font-size:1.4rem;
-border:none;
-border-radius:60px;
-cursor:pointer;
-font-weight:700;
-transition:0.3s;
-position:absolute;
-}
-
-#yesBtn{
-background:white;
-color:#ff4f81;
-left:18%;
-box-shadow:0 0 25px rgba(255,255,255,0.7);
-}
-
-#yesBtn:hover{
-transform:scale(1.12);
-}
-
-#noBtn{
-background:#ff4f81;
-color:white;
-right:18%;
-box-shadow:0 0 25px rgba(255,79,129,0.8);
-}
-
-/* Final Message */
-
-.final{
-display:none;
-margin-top:70px;
-animation:finalAnim 1.5s ease forwards;
-}
-
-@keyframes finalAnim{
-from{
-opacity:0;
-transform:scale(0.4);
-}
-to{
-opacity:1;
-transform:scale(1);
-}
-}
-
-.final h2{
-font-size:2.4rem;
-margin-bottom:25px;
-line-height:4rem;
-}
-
-.love{
-font-size:6rem;
-font-weight:700;
-background:linear-gradient(to right,#fff,#ffdde1,#fff);
--webkit-background-clip:text;
--webkit-text-fill-color:transparent;
-animation:loveAnim 1.5s infinite alternate;
-}
-
-@keyframes loveAnim{
-from{
-transform:scale(1);
-text-shadow:0 0 20px white;
-}
-to{
-transform:scale(1.1);
-text-shadow:0 0 40px white;
-}
-}
-
-/* Romantic Lines */
-
-.lines{
-margin-top:80px;
-display:grid;
-gap:25px;
-}
-
-.line{
-font-size:1.3rem;
-padding:25px;
-border-radius:20px;
-background:rgba(255,255,255,0.08);
-animation:fadeLine 1s ease forwards;
-opacity:0;
-transform:translateY(50px);
-}
-
-.line:nth-child(1){animation-delay:1s;}
-.line:nth-child(2){animation-delay:2s;}
-.line:nth-child(3){animation-delay:3s;}
-.line:nth-child(4){animation-delay:4s;}
-
-@keyframes fadeLine{
-to{
-opacity:1;
-transform:translateY(0);
-}
-}
-
-.scrollText{
-margin-top:80px;
-font-size:2rem;
-animation:updown 2s infinite;
-}
-
-@keyframes updown{
-0%{transform:translateY(0);}
-50%{transform:translateY(-10px);}
-100%{transform:translateY(0);}
-}
-
-</style>
+        footer {
+            text-align: center;
+            margin-top: 80px;
+            font-size: 0.9rem;
+            opacity: 0.7;
+        }
+    </style>
 </head>
-
 <body>
 
-<div class="hearts" id="hearts"></div>
+    <header>
+        <h1>Our Little Moments</h1>
+        <p>A collection of memories, art, and everything in between.</p>
+    </header>
 
-<div class="container">
+    <div class="scrapbook-grid">
+        <!-- Photo 1 (Tall) -->
+        <div class="polaroid tall">
+            <img src="https://via.placeholder.com/500x800" alt="Memory 1">
+            <div class="caption">Mountain Mornings</div>
+        </div>
 
-<div class="card">
+        <!-- Photo 2 (Wide) -->
+        <div class="polaroid wide">
+            <img src="https://via.placeholder.com/800x400" alt="Memory 2">
+            <div class="caption">City Lights & Late Nights</div>
+        </div>
 
-<h1 class="title">Forgive Me Ginni ❤️</h1>
+        <!-- Photo 3 -->
+        <div class="polaroid">
+            <img src="https://via.placeholder.com/400x400" alt="Memory 3">
+            <div class="caption">Coffee Dates</div>
+        </div>
 
-<div class="typing" id="typing"></div>
+        <!-- Photo 4 -->
+        <div class="polaroid">
+            <img src="https://via.placeholder.com/400x400" alt="Memory 4">
+            <div class="caption">Sunset Bliss</div>
+        </div>
 
-<div class="lines">
+        <!-- Photo 5 (Wide) -->
+        <div class="polaroid wide">
+            <img src="https://via.placeholder.com/800x400" alt="Memory 5">
+            <div class="caption">The Best Weekend Ever</div>
+        </div>
+    </div>
 
-<div class="line">
-Maybe I was not perfect... but my feelings for you were always real ❤️
-</div>
+    <footer>
+        <p>Built with ♡ and hosted on GitHub Pages</p>
+    </footer>
 
-<div class="line">
-Every mistake taught me your value even more...
-</div>
-
-<div class="line">
-I don't want temporary memories with you... I want forever 🌍
-</div>
-
-<div class="line">
-No matter what happens... my heart still chooses you ✨
-</div>
-
-</div>
-
-<div class="question">
-Do You Forgive Me? 🥺
-</div>
-
-<div class="buttons">
-
-<button id="yesBtn">
-Yes ❤️
-</button>
-
-<button id="noBtn">
-No 💔
-</button>
-
-</div>
-
-<div class="final" id="finalMessage">
-
-<h2>
-I know tu mujhse jyada time gussa nhii reh skti 😭❤️
-</h2>
-
-<div class="love">
-LOVE YOU ✨
-</div>
-
-</div>
-
-<div class="scrollText">
-❤️ Forever & Always ❤️
-</div>
-
-</div>
-
-</div>
-
-<script>
-
-/* Typing Animation */
-
-const text = `
-I know I made many mistakes in my past...
-
-Maybe I hurt you...
-Maybe I failed to understand you sometimes...
-
-But trust me...
-my intentions for you were never fake.
-
-You are genuinely special to me ❤️
-
-I don't just want your attention...
-I want your smile,
-your happiness,
-your presence,
-your forever.
-
-And if I get one more chance...
-I promise I will love you better than before...
-`;
-
-let i = 0;
-const speed = 40;
-
-function typing(){
-if(i < text.length){
-document.getElementById("typing").innerHTML += text.charAt(i);
-i++;
-setTimeout(typing,speed);
-}
-}
-
-typing();
-
-/* Floating Hearts */
-
-const hearts = document.getElementById("hearts");
-
-for(let i=0;i<70;i++){
-
-const heart = document.createElement("div");
-
-heart.classList.add("heart");
-
-heart.innerHTML = "❤️";
-
-heart.style.left = Math.random()*100 + "vw";
-
-heart.style.fontSize = Math.random()*30 + 15 + "px";
-
-heart.style.animationDuration = Math.random()*8 + 5 + "s";
-
-heart.style.opacity = Math.random();
-
-hearts.appendChild(heart);
-}
-
-/* Buttons */
-
-const noBtn = document.getElementById("noBtn");
-const yesBtn = document.getElementById("yesBtn");
-const finalMessage = document.getElementById("finalMessage");
-
-let yesScale = 1;
-let noScale = 1;
-
-noBtn.addEventListener("click",()=>{
-
-yesScale += 0.18;
-noScale -= 0.1;
-
-yesBtn.style.transform = `scale(${yesScale})`;
-noBtn.style.transform = `scale(${noScale})`;
-
-const randomX = Math.random()*500 - 250;
-const randomY = Math.random()*200 - 100;
-
-noBtn.style.left = `${randomX}px`;
-noBtn.style.top = `${randomY}px`;
-
-if(noScale <= 0.3){
-noBtn.style.display = "none";
-}
-
-});
-
-yesBtn.addEventListener("click",()=>{
-
-finalMessage.style.display = "block";
-
-document.querySelector(".buttons").style.display = "none";
-
-document.querySelector(".question").innerHTML = "Awwww ❤️";
-
-});
-
-</script>
-
+    <script>
+        // Simple Interaction: Click a polaroid to "shake" it
+        document.querySelectorAll('.polaroid').forEach(item => {
+            item.addEventListener('click', () => {
+                item.style.transition = '0.1s';
+                item.style.transform = 'translateX(5px)';
+                setTimeout(() => item.style.transform = 'translateX(-5px)', 50);
+                setTimeout(() => {
+                    item.style.transition = '0.4s';
+                    item.style.transform = 'rotate(0deg) scale(1.05)';
+                }, 100);
+            });
+        });
+    </script>
 </body>
 </html>
